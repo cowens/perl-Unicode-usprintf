@@ -16,7 +16,7 @@ our @EXPORT_OK = qw/upad/;
 
 my $extract_sprintf_formats = qr{
 	%
-	(?: (?<format_parameter_index> [1-9][0-9]+ ) \$ )?
+	(?: (?<format_parameter_index> [1-9][0-9]* ) \$ )?
 
 	(?<flags>
 		(?:
@@ -143,7 +143,8 @@ sub upad {
 	$justify  //= "left";
 
 	if ($length > $max) {
-		$gcs = $gcs->substr(0, $max);
+		$gcs    = $gcs->substr(0, $max);
+		$length = $max;
 	}
 
 	my $pad_length = $min - $length;
@@ -221,7 +222,7 @@ sub usprintf($@) {
 
 		my %flags = map { $_ => 1 } split //, $+{flags} // ""; 
 
-		my $pad_char = $flags{0} && not $flags{"-"} ? 0 : " ";
+		my $pad_char = $flags{0} && ! $flags{"-"} ? 0 : " ";
 
 		my $justify = $flags{"-"} ? "left" : "right";
 
@@ -232,9 +233,11 @@ sub usprintf($@) {
 		# info, we are going to do that ourselves
 		my $format_substr_length = $+[0] - $-[0];
 
-		substr $modified_format, $-[0] - $substr_modifier, $format_substr_length, "%s";
+		my $format = "%" . ($index + 1) . '$s';
 
-		$substr_modifier += $format_substr_length - 2;
+		substr $modified_format, $-[0] - $substr_modifier, $format_substr_length, $format;
+
+		$substr_modifier += $format_substr_length - length $format;
 	}
 
 	return sprintf $modified_format, @args;
