@@ -95,7 +95,7 @@ my $extract_sprintf_formats = qr{
 
 =head1 NAME
 
-Unicode::usprintf - Provides an sprintf interface that handle Unicode combining characters properly
+Unicode::usprintf - Provides an sprintf interface that handles Unicode combining characters properly
 
 =head1 VERSION
 
