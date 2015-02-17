@@ -1,4 +1,5 @@
 Changes
+ignore.txt
 lib/Unicode/usprintf.pm
 Makefile.PL
 MANIFEST			This list of files
@@ -11,4 +12,5 @@ t/01-formats.t
 t/02-sprintf.t
 t/03-sprintf.t
 t/04-usprintf.t
+t/05-upad.t
 t/test.pl
