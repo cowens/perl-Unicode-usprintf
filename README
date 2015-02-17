@@ -1,16 +1,17 @@
 Unicode-usprintf
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+Unicode::usprintf exports usprintf, a function that behaves exactly like
+sprintf, but has a %S format that correctly handles Unicode combining
+characters. It also can export upad, a function that can pad strings
+containing combining characters in a variety of ways.
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+	use Unicode::usprintf;
 
+	# $wrong is now "[  e\x{301}]"
+	my $wrong = usprintf "[%4s]", "e\x{301}";
+
+	# $right is now "[   e\x{301}]"
+	my $right = usprintf "[%4S]", "e\x{301}";
 
 INSTALLATION
 
