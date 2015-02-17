@@ -7,3 +7,8 @@ t/00-load.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
+t/01-formats.t
+t/02-sprintf.t
+t/03-sprintf.t
+t/04-usprintf.t
+t/test.pl
