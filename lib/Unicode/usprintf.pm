@@ -99,11 +99,11 @@ Unicode::usprintf - Provides an sprintf interface that handle Unicode combining 
 
 =head1 VERSION
 
-Version 0.0.1
+Version 0.0.2
 
 =cut
 
-use version; our $VERSION = version->declare("v0.0.1");
+use version; our $VERSION = version->declare("v0.0.2");
 
 =head1 SYNOPSIS
 
@@ -149,19 +149,17 @@ sub upad {
 
 	my $pad_length = $min - $length;
 
-	$s = $gcs->as_string;
-
 	if ($justify eq "center") {
-		my $left  = $pad_char x ($min/2);
-		my $right = $pad_char x ($min/2+.5);
+		my $left  = $pad_char x int($pad_length/2);
+		my $right = $pad_char x int($pad_length/2+.5);
 
-		return "$left$s$right";
+		return "$left$gcs$right";
 	}
 
 	my $padding = $pad_char x $pad_length;
 
-	return "$s$padding" if $justify eq 'left';
-	return "$padding$s" if $justify eq 'right';
+	return "$gcs$padding" if $justify eq 'left';
+	return "$padding$gcs" if $justify eq 'right';
 }
 
 =head2 usprintf FORMAT, ARGS

@@ -1,5 +1,8 @@
 Revision history for Unicode-usprintf
 
-0.01    Date/time
+0.0.2   2015-02-17
+        Added tests for upad, fixes for bugs the tests found
+
+0.0.1   2015-02-17
         First version, released on an unsuspecting world.
 
